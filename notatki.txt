@@ -1,0 +1,6 @@
+CREATE DATABASE - stworzenie bazy danych
+Składnia:
+CREATE DATABASE nazwaDB
+USE nazaDB
+CREATE TABLE nazwaTabeli(column1 typ danych,coulmna2 typ danych)
+INSERT INTO nazwa_tabeli('kolumna') VALUES ('wartosc');

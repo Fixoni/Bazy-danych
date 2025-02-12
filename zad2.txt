@@ -1,0 +1,14 @@
+1. Utworzyc kolumne tak zeby byla pierwsza przed w tabeli w 4 wierszu wprowadzic disiejsza date
+ALter Table klienci add column data date FIRST;
+update klienci set data='204-11-28' where IDKlienta=4;
+
+2.wyswietls max wartosc z idklienta
+SELECT max(IDKlienta) from klienci;
+
+3.zmien nazwe kolumny idklienta ,a lp oraz na typ daty
+ALTER TABLE klienci CHANGE COLUMn IDKlienta lp date;
+
+4.posortuje malejaca po imeniu klienta
+select ImieKlienta from klienci order by ImieKlienta desc;
+
+5.select * from klienci where (Kraj!='USA') and (ImieKlienta BETWEEN 'b' and 'f');

@@ -1,0 +1,7 @@
+alter table klienci change column kraj kraj date;
+
+alter table klienci change IDKlienta Lp int;
+
+delete from klienci where Lp=12;
+
+insert into klienci (lp) value (19);

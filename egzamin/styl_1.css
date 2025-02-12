@@ -1,0 +1,39 @@
+* {
+    background-color: #F6E5DC;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.left {
+   width: 60%;
+}
+.right {
+   size: 150%;
+}
+.down {
+    background-color: #D0B6A8;
+    text-align: center;
+    margin: 30px;
+}
+.blok {
+    float: none;
+}
+header {
+    text-align: center;
+    color: khaki;
+    background-color: #2F180C;
+    height: 60px;
+}
+img {
+    height: 350px;
+}
+footer {
+    background-color: #2F180C;
+    height: 60px;
+    color: khaki;
+}
+button {
+    margin: 10px;
+    padding: 5px;
+    background-color: #2F180C;
+    color: khaki;
+}

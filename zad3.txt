@@ -1,0 +1,5 @@
+1.utworz 2 kolumny typ date jako first, typ varchar po after nazwisko
+2. dodaj 13 wiersz tylko id klienta
+3. niemcy na hawaje
+4. max idklienat
+5. usunac 1 kolumne

@@ -1,0 +1,224 @@
+BAZY DANYCH NOTATKI:
+CREATE DATABASE nazwaDB->sluzy do tworzenia bazy danych
+
+USE nazwaDB->to znaczy uzyj tego poleceniana na tej bazie danch
+
+CREATE TABLE nazwaTabeli (colum1 typ danych,column2 typ danych);
+
+INSERT INTO nazwaTabeli(klumna1,kolumna2,kloumna3)VALUES(wartosc1,waryosc2)->dodawanie zawartosci do tabeli
+
+SELECT * FROM klienci;=> wyswietlanie calej tablicy
+
+SELECT DISTINCT kraj from klienci; =>niepowtarzalne wiersze
+
+SELECT COUNT(DISTINCT Kraj)FROM klienci; =>poda wartosc unikalna w postaci cyfry
+
+SELECT * FROM klienci WHERE Kraj='polska'; =>wyciaganie konkretnej rzeczy z duzej bazy danych
+
+SELECT *FROM klienci WHERE ImieKlienta BETWEEN 'c' AND 'k'; =>uzywanie  between
+
+SELECT *FROM klienci WHERE IdKlienta > 2 AND IdKlienta <8; 
+
+SELECT *FROM klienci WHERE ImieKlienta LIKE 's%'; PRZYKALD: S%=>Sophie S z przodu, %S S z tylu Pophis
+
+SELECT Miasto from klienci WHERE Miasto LIKE '_a%'; => wyswietlanie miast z 2 literka a
+
+SELECT * FROM klienci WHERE Miasto LIKE "_a%";=> Warszawa sama literka!
+SELECT * FROM klienci WHERE Miasto LIKE "%i_"; =>i przed ostatnie Szczecin
+SELECT * FROM klienci WHERE nazwiskoKlienta between 'b' and 'm'; =>nazwiska pomiedzy b-m
+
+Wyswietl klientow z polski, niemiec,francji z id od 2 do 6 i miasta z litera a w dowolnym miejscu:
+SELECT * FROM klienci WHERE Kraj='Polska'or Kraj='Niemcy' or Kraj='Francja' AND (IdKlienta BETWEEN 2 and 6) and Miasto LIKE '%a%'; 
+
+SELECT * FROM Klienci WHERE Miasto IN ('Warszawa','London')=> caly ciag znakow! szukanie wieciej niz 1 zmiennej wypluje warszawe i londyn
+
+WHERE:
+AND jesli wszytskie warunki sa prawdziwe 
+OR jeden z wyrazow jest prawdziwy
+NOT warunki sa nie prawdziwe
+
+SKLADNIA NOT:
+NOT jesli warunek nie jest prawdziwy: SELECT * FROM Klienci WHERE not Kraj = "Niemcy"; 
+
+ZADANIE: WYSWIELT WSZYTSKICH POLAKOW , NIEMOCW LUB AMERYKANOW KTORZY MAJA LITERE A LUB B LUB M W DOWOLNYM MIEJSCU IMIENIA, POCHODZA Z MIASTA
+Z LITERA A W DOWOLNYM MIEJSCU A ICH KOD POCZTOWY TOMA ZNAK -  :
+
+select * from klienci where kraj in ('polska','Niemcy','USA') and(ImieKlienta like '%a%' or ImieKlienta like '%b%' or ImieKlienta like '%m%') and Miasto like "%a%" and KodPocztowy like "%-%"; 
+
+SKLADNIA ORDER BY:(sortowanie)
+ASC=>od 1 do 100
+DESC=> od 100 do 1
+
+SELECT * FROM `klienci` ORDER BY IdKlienta desc,ImieKlienta desc; 
+SELECT * FROM `klienci` ORDER BY Miasto asc; => BERLIN ZACZNIE SIE
+
+ZADANIE: WYSWIETLNAZWISKA MALEJACO KLIENTOW POCHODZACYCH Z POLSKI LUB USA LUB FRANCJI MAJACYCH W NAZWIE MIASTA PRZEDOSTATNIA LITERE 
+W   A W IMIENIU MOGA MIEC LITERE A,B,C,M W DOWOLNYM MUEJSCU:
+
+SELECT NazwiskoKlienta from klienci WHERE Kraj in('Polska','USA','Francja') and Miasto like '%w_' and (ImieKlienta like '%a%' or ImieKlienta like '%b%' or ImieKlienta like '%c%' or ImieKlienta like '%m%') ORDER by NazwiskoKlienta desc; 
+
+ZADANIE:
+
+SELECT * FROM klienci WHERE (NazwiskoKlienta BETWEEN 'C' AND 'R') and kraj in('Polska','Niemcy','Francja') and IdKlienta >2 ORDER by IdKlienta desc; 
+
+
+
+ODPOWIEDZ:
+
+SELECT COUNT(DISTINCT Kraj)FROM klienci;
+
+Wypisz cala tabele (IdKlienta) dla klientow od 1 do 8 ktorzy nie sa niemcami w miescie maja litere w dowolnym miejscu A:
+
+SELECT * FROM `klienci` WHERE (IdKlienta BETWEEN 1 and 8 ) and kraj!='Niemcy' and Miasto like '%a%'; 
+
+SELECT * FROM `klienci` WHERE ImieKlienta BETWEEN 'b' and 'g'; 
+
+SELECT DISTINCT kraj from klienci; 
+
+
+NULL:
+
+SELECT * FROM `klienci` WHERE ImieKlienta IS NULL; => jak cos jest nullem to to wypisze ( w tym przykladzie nic nie wypisze)
+
+SELECT * FROM `klienci` WHERE Kraj IS NOT NULL; => tu wyswietli wszytsko cala tabele
+
+
+
+ALTER TABLE : dodawanie zawartosci do tablicy:
+
+ALTER TABLE klienci ADD COLUMN Samochod varchar(40); => doda na sam koniec (standardowo na koncu )
+
+ALTER TABLE klienci ADD COLUMN Nowa date FIRST; => stworzy kolumne jest null ale ma zawartosc date a first doda kolumne na poczatek tablicy
+
+ALTER TABLE klienci ADD COLUMN Haslo text after/before NazwiskoKlienta; => doda kolune haslo za Nazwiskiem Klienta (mozna ustawiac w dowolny sposob)
+
+
+USUWANIE KOLUMN!!:
+
+ALTER TABLE klienci DROP COLUMN Haslo; => USUWA HASLO 
+
+
+ZMIANA NAZW:!!
+
+ALTER TABLE klienci CHANGE COLUMN IdKlienta lp int; => najpierw stara => zamiana na nowa + typ
+
+
+ZMIANA TYPU KOLUMNY:
+
+ALTER TABLE klienci CHANGE COLUMN lp lp varchar(50);
+
+
+UPDATE:
+
+UPDATE klienci SET ImieKlienta="Andrzej" , NazwiskoKlienta="Duda" WHERE lp =1; => zamiana nazwy 1 ziomka zawsze pisz id ! bo zmieni wszytskich!
+
+UPDATE klienci SET ImieKlienta="Andrzej"; => wszyscy sie zmienili na Andrzej (imie u kazdego)
+
+delete from klienci where Kraj="Niemcy"; => usunie Niemcy 
+
+ODPOWIEDZ 2:
+
+alter table klienci change column Kraj  Kraj date;
+
+alter table klienci change column IdKlienta lp int; 
+
+delete from klienci where lp =12; => usuwa 12 wers!
+
+INSERT into klienci(lp) VALUES (19); => dodawanie 19 wersu
+
+SELECT * FROM `klienci` WHERE kraj !='Niemcy' and Miasto like '__r%' and (NazwiskoKlienta like '%a%' or NazwiskoKlienta like '%b%' or NazwiskoKlienta like '%c%'); 
+
+
+ZADANIE NA LEKCJI:
+
+create database Krakow;
+
+create table dzielnice (Lp int, NazwaDzielnicy text,LiczbaMieszkancow text)
+
+INSERT into dzielnice(Lp,NazwaDzielnicy,LiczbaMieszkancow) VALUES (4,"Zablocie",50000);
+
+SELECT * FROM `dzielnice` order by NazwaDzielnicy desc; 
+
+alter table dzielnice CHANGE COLUMN LiczbaMieszkancow Mieszkancy text; 
+
+alter table dzielnice add column Daty date; 
+
+INSERT into dzielnice VALUES(5,"","",'2024-11-14'); 
+
+alter table dzielnice drop COLUMN Lp; 
+
+alter table dzielnice CHANGE column NazwaDzielnicy MojKrakow text; 
+
+drop DATABASE krakow; 
+
+
+USER :
+
+drop user Patryk;
+
+CREATE USER 'Patryk'@'localhost' IDENTIFIED BY 'password';
+
+GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
+
+
+LIMIT:
+
+SELECT * FROM `klienci` LIMIT 3;  /  SELECT * FROM `klienci` WHERE IdKlienta BETWEEN 1 and 3
+
+MAX:
+
+SELECT MAX(IdKlienta) from klienci; => dziala na cyfrach i literach wyswietla najwyzsza wartosc
+
+MIN:
+
+SELECT MIN(OsobaKontaktowa) from klienci; => dziala na cyfrach i literach wyswietla najnizsza wartosc
+
+AVG:
+
+SELECT AVG(ImieKlienta) from klienci; => srednia wylicza (nie dziala z literami)
+SELECT AVG(IdKlienta) from klienci;=> to zadziala
+
+SUM:
+
+SELECT SUM(IdKlienta) from klienci;  => wylicza sume (nie dziala z literami)
+
+COUNT:
+
+SELECT COUNT(DISTINCT kraj) from klienci; => sprawdza ile wierszy spelnia okreslony warunek
+
+SELECT COUNT(IdKlienta) from klienci WHERE Kraj='Polska';
+
+ALIAS:
+
+select IdKlienta as Lp from klienci;=> wypisze Lp zamiast IdKlienta (podmienia je)
+
+select IdKlienta as ID,NazwiskoKlienta as name, kraj as country from klienci;=> zmienia wiecej niz 1 
+
+select IdKlienta as ID, concat(ImieKlienta,'',NazwiskoKlienta)as name,kraj as country from klienci;
+
+
+
+
+
+KLUCZE:
+
+create table Obywatel(Id int not null PRIMARY KEY,Imie text not null,Nazwisko text not null,Wiek int,Adres text); 
+
+create table Human(Id int not null,Imie varchar(222) not null,Nazwisko text not null,Wiek int,Adres varchar(222),CONSTRAINT PK_Human PRIMARY Key (Id,Imie));=> klucz glowny nie moze byc tekstem
+
+=dodawanie do istniejacej tabeli klucz glowny :
+
+alter table klienci ADD PRIMARY Key (IdKlienta);
+
+=usuwanie klucza glownego:
+
+alter table klienci drop primary key
+aby usunac primary kry nalezy wylaczyc atoincrement!
+
+wypisywanie kluczow obcych :
+
+show index from human;
+
+zadanie:
+
+alter table klienci ADD PRIMARY key (IdKlienta);

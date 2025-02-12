@@ -1,0 +1,47 @@
+SELECT kraj,KodPocztowy,Miasto FROM klienci;
+
+SELECT * FROM `klienci`
+
+Select DISTINCT kraj from klienci;
+
+SELECT DISTINCT ImieKlienta FROM klienci;
+
+SELECT DISTINCT IDKlienta,Kraj from klienci;
+
+SELECT count(DISTINCT kraj) from klienci;
+
+select * from klienci where IDKlienta=8;
+
+select * from klienci where Kraj="Polska";
+
+SELECT * from klienci where ImieKlienta BETWEEN "C" and "P";
+
+SELECT * FROM `klienci` where IDKlienta >2 and IDKlienta<8;
+
+SELECT * FROM `klienci` WHERE ImieKlienta like "%s";
+
+SELECT * FROM `klienci` WHERE ImieKlienta like "__s";
+
+SELECT * FROM `klienci` WHere miasto like"_a%";
+
+SELECT * FROM `klienci` WHere miasto like"%i_";
+
+SELECT * FROM `klienci` WHere miasto like"%_e_%";
+
+wyświelt klientów z polski,niemiec,francji z id od 2 do 6 i miasta z litera a
+
+SELECT * FROM `klienci` WHEre Miasto IN ('Warszawa','Londyn');
+
+SELECT * FROM `klienci` WHEre Miasto IN ('Hamburg');
+
+SELECT kraj from klienci where NOT kraj="Niemcy";
+
+Select * from klienci where Kraj in('Polska','Niemcy','USA') and (ImieKlienta like '%a%' or ImieKlienta like '%b%' or ImieKlienta like '%m%') and (miasto like '%a%' and KodPocztowy like '%-%');
+
+select * from klienci ORDER by IdKlienta,ImieKlienta DESC;
+
+Select NazwiskoKlienta from klienci where Kraj in('Polska','USA','Francja') and (Miasto like '%w_') and (ImieKlienta like '%a%' or ImieKlienta like '%b%' or ImieKlienta like '%c%' or ImieKlienta like '%m%') ORDER by NazwiskoKlienta DESC;
+
+Select mazwaKolumny AS mazwaAliasu from nazwaTabeli
+
+Select IDKlienta AS lp, concat(ImieKlienta, " ",NazwiskoKlienta," ") as imie from klienci;
