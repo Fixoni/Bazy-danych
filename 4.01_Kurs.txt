@@ -1,0 +1,307 @@
+3. Use kurs;
+show tables;
+desc etaty;
+select* from etaty;
+desc pracownicy;
+select * from pracownicy;
+desc zespoly;
+select * from zespoly;
+4.
+
+ create table kurs_jeden (id int not null auto_increment primary key, nazwa varchar(20));
+
+5.
+
+create table kurs_dwa(id int, nazwa varchar(20));
+
+6.
+
+Create table osoby(id int primary key, nazwisko text, miasto text);
+
+7.
+
+create table kody(k_id int, nazwa text, id int);
+
+8.
+
+create table obsluga(id_obsl int, nazwisko varchar(50) not null, imie varchar(30) not null, constraint obid primary key (id_obsl));
+
+9.
+
+alter table obsluga add column adres varchar(30);
+
+10.
+
+alter table obsluga modify nazwisko varchar(50);
+
+11.
+
+desc kody;
+desc osoby;
+alter table kody add constraint dowiazanie foreign key(id) references osoby(id) on delete cascade on update cascade;
+
+12.
+
+insert into osoby() values(1,'Nowak','Warszawa');
+insert into osoby() values (2,'Kowalski','Poznań');
+
+13.
+
+insert into kody values (1,'22-222',1);
+insert into kody values (2,'33-333',2);
+
+14.
+
+update osoby set id=3 where id=2;
+select* from osoby;
+select * from kody;
+
+15.
+
+alter table kurs_dwa add column dodana_kolumna int;
+
+16.
+
+alter table kurs_dwa drop column dodana_kolumna;
+
+17.
+
+alter table kurs_dwa rename kurs_dwa_prim;
+
+18.
+
+insert into kurs_jeden values (1,'Stringer');
+insert into kurs_jeden values ('rrr',2);
+insert into kurs_jeden values (3,'aaa');
+select * from kurs_jeden;
+
+19.
+
+update kurs_jeden set nazwa="bbb" where id =3;
+
+20.
+
+update kurs_jeden set nazwa="ddd";
+
+21.
+
+desc pracownicy;
+update pracownicy set placa_pod=placa_pod+30;
+select placa_pod, placa_pod+30 as zpodwyzka from pracownicy;
+
+22.
+
+select placa_pod, placa_pod+500 as sekretarkkowaKasa from pracownicy where etat="sekretarka";
+
+23.
+
+delete from kurs_jeden where id=1;
+
+24.
+
+delete from kurs_jeden;
+
+25.
+
+select * from pracownicy;
+
+26.
+
+28.
+
+select nazwisko from pracownicy;
+
+29.
+
+select nazwisko, placa_pod,placa_dod from pracownicy;
+
+30.
+
+select nazwisko, placa_pod as 'Płaca podstawowa', placa_dod as 'Płaca dodatkowa' from pracownicy;
+
+31.
+
+select * from pracownicy where id_zesp=10;
+
+32.
+
+select * from pracownicy where id_zesp=10 or id_zesp=20;
+select * from pracownicy where id_zesp in(10,20);
+
+33.
+
+select * from pracownicy where id_zesp=10 and id_zesp=20;
+
+34.
+
+and or
+pierwszy zawsze and potem or
+select * from pracownicy where (id_zesp=20 and id_zesp=10) or id_zesp=30;
+
+35.
+
+% dowolny znak/ciąg znaków
+_ jeden znak
+
+select nazwisko from pracownicy where nazwisko like 'k%';
+
+36.
+
+select nazwisko from pracownicy where nazwisko like '%ski';
+
+37.
+
+select nazwisko from pracownicy where nazwisko like '_a%';
+
+38.
+
+select nazwisko from pracownicy where nazwisko like '%a%';
+
+39.
+
+select nazwisko from pracownicy where nazwisko like 'k%' or nazwisko like 's%';
+
+40.
+
+select nazwisko, etat from pracownicy where etat="Profesor" or etat="Adiunkt";
+
+41.
+and
+select * from pracownicy where placa_pod>1000 and placa_pod<1500;
+
+select * from pracownicy where placa_pod between 1000 and 1500;
+
+42. not between
+select * from pracownicy where placa_pod<1000 or placa_pod>1500;
+select * from pracownicy where placa_pod not between 1000 and 1500;
+
+
+43.
+select nazwisko, etat from pracownicy where etat not in("Profesor", "Adiunkt");
+
+44. DESC descending
+ASC ascending
+select nazwisko, etat, placA_pod from pracownicy order by placa_pod;
+select nazwisko, etat, placA_pod from pracownicy order by placa_pod ASC;
+select nazwisko, etat, placA_pod from pracownicy order by 3;
+select * from pracownicy order by 6;
+
+45. 
+select nazwisko, etat, placA_pod from pracownicy order by placa_pod DESC;
+select nazwisko, etat, placA_pod from pracownicy order by 3 DESC;
+
+46. select nazwisko, etat, placa_pod from pracownicy order by nazwisko ASC, etat Desc;
+select nazwisko, etat, placa_pod from pracownicy order by 1,2 Desc;
+
+47. select nazwisko, etat, placa_pod from pracownicy order by nazwisko ASC, etat Desc;
+select nazwisko, etat, placa_pod from pracownicy order by 1 Desc;
+
+48.select nazwisko, etat, placa_pod from pracownicy order by nazwisko ASC, etat Desc;
+select nazwisko, etat, placa_pod from pracownicy order by 3 Desc;
+
+49. select placA_pod, placA_dod from pracownicy;
+
+50. select placA_pod, placA_dod, placa_pod +placa_dod as "pensja" from pracownicy;
+IFNULL(kolumna, wartosc)
+select placA_pod, placA_dod, IFNULL(placa_pod,0) +IFNULL(placa_dod,0) as "pensja" from pracownicy;
+
+51. operacje na łańcychach znakowych
+upper
+select nazwisko, upper(nazwisko) as DuzeNazwisko from pracownicy;
+
+52. lower()
+select nazwisko, lower(nazwisko) as MaleNazwisko from pracownicy;
+
+53. reverse()
+select nazwisko, reverse(nazwisko) as OdwrotnieNazwisko from pracownicy;
+
+54. concat()
+select nazwisko, id_zesp, concat(nazwisko, id_zesp) as login from pracownicy;
+
+55.concat_ws()
+select nazwisko, id_zesp ,concat_ws("=>", nazwisko, id_zesp) as login from pracownicy;
+
+56. left(kolumna, ile_znaków)
+select nazwisko, left(nazwisko,5) as 5liter from pracownicy;
+
+57.right(kolumna, ile_znaków)
+select nazwisko, right(nazwisko,5) as 5liter from pracownicy;
+
+58. mid(kolumna,początek,ile_liter)
+select nazwisko, mid(nazwisko,3,5) as login from pracownicy;
+
+59. lenghth(kolumna)
+select nazwisko, length(nazwisko) from pracownicy;
+
+60. locate("znak",kolumna)
+select nazwisko, locate("a", nazwisko) as LiteraA from pracownicy;
+
+61. funkje daty()
+select now();
+select current_timestamp();
+
+62. dayname(now());
+select dayname(now());
+
+63. monthname()
+select monthname(now());
+dayofmonth()
+
+64.dayofyear()
+select dayofyear(now());
+
+65.date_format()
+select date_format(now(),"%T");
+
+66.sec_to_time()
+select sec_to_time(500);
+
+67.addtime()
+select addtime('02:12:21','11:28:28');
+
+68.subtime()
+select subtime(now(), "00:22:23");
+select subtime('02:12:21','11:28:28');
+
+69. time_to_sec() zmiana na sekundy
+select time_to_sec("00:00:02");
+
+70, adddate(interval)
+select adddate(now(), interval 10 day);
+select adddate(now(), interval 10 month);
+select adddate(now(), interval 10 year);
+
+71.subdate()
+select subdate(now(), interval 10 day);
+select subdate(now(), interval 10 month);
+select subdate(now(), interval 10 year);
+
+73. grupowanie danych: group by
+select nazwisko, etat from pracownicy group by etat;
+select etat from pracownicy group by etat;
+select etat, id_zesp from pracownicy where id_zesp>30 group by etat;
+select etat, id_zesp from pracownicy where id_zesp>30 group by etat, id_zesp;
+
+74. funkcje agregujące
+select etat, count(*) from pracownicy;
+select etat, count(*) from pracownicy group by etat;
+
+75. sum()
+select sum(placa_pod) from pracownicy;
+select etat, sum(placa_pod) from pracownicy group by etat;
+
+76.
+select count(*) from pracownicy;
+
+77.
+select count(placa_dod) from pracownicy;
+
+78. avg()
+select id_zesp, avg(placa_pod) from pracownicy;
+select id_zesp, avg(placa_pod) from pracownicy group by id_zesp;
+
+79. min() max()
+select id_zesp, min(placa_pod) from pracownicy group by id_zesp;
+select id_zesp, max(placa_pod) from pracownicy group by id_zesp;
+
+80.

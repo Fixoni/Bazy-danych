@@ -1,0 +1,32 @@
+*{
+    
+}
+.baner{
+    background-image: url("menu.png");
+    color: blue;
+    height: 200px;
+}
+.srodek{
+    display: flex;
+}
+.lewy{
+    background-color:rgb(255, 218, 65);
+    text-align: center;
+    width: 40%;
+    height: 400px;
+}
+.srodkowy{
+    background-color: rgb(255, 226, 100);
+    text-align: center;
+    width: 30%;
+    height: 400px;
+}
+.prawy{
+    background-color: rgb(255, 233, 143);
+    text-align: center;
+    width: 30%;
+    height: 400px;
+}
+footer{
+    background-color: rgb(255, 218, 65);
+}
